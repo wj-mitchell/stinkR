@@ -2,8 +2,8 @@
 
 # Will create a new dataframe containing the correlation matrices, which themselves contain correlations between the identified variables
 xyzcompare <- function(df,          # Dataframe to be analyzed
-                       wtnvars,     # A list of variable names across which coorelations should be run 
-                       btwvars)     # A list of variable names across which coorelations should not be run
+                       wtnvars,     # A list of variable names across which correlations should be run 
+                       btwvars)     # A list of variable names across which correlations should not be run
 {
   # Dependent packages----
   library(tidyverse)
