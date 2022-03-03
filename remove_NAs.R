@@ -1,7 +1,7 @@
 ## remove_NAs.R | v2022.01.18
 
 # Will just remove any rows and/or columns that have all NAs in them
-remove_NAs <- function(df,
+remove_NAs <- function(df = .,
                        rows = TRUE,
                        cols = TRUE,
                        rows_range = NA,

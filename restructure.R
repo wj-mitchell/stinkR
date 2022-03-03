@@ -1,17 +1,18 @@
-## col_restructure.R | v2022.02.02
+## restructure.R | v2022.02.02
 
-# Will break components of a filename or an array that are consistently separated 
-# by a given character and reassmble those components into a new array that contains
+# Will break components of a file name or an array that are consistently separated 
+# by a given character and reassemble those components into a new array that contains
 # all possible combinations of those components. It will also create new subcolumns.
-# Especially helpful when data is missing. Rather than datafiles simply being absent 
+# Especially helpful when data is missing. Rather than data files simply being absent 
 # from a final product, spaces for missing data will be made and can be filled with NAs.
 
 restructure <- function(array = NA, # An array containing the strings to restructure; can be used instead of directory
-                            directory = NA, # A directory containing the filenames that can be turned into strings and restructured; can be used instead of array
-                            recursive = TRUE, # If directory is used, this will determine where we are interested in files contained within subdirectories within that file
-                            filetype = "csv", # If directory is used, what type of files are we pulling.
-                            sep = "_", # The character separating the different components
-                            subcols = dims) # An optional array that will replicate every column according to the arrays length and append the elements of the array to the end of each column name. Helpful if working with neural data wherein each datapoint has 3 dimensions and a value.)
+                        directory = NA, # A directory containing the filenames that can be turned into strings and restructured; can be used instead of array
+                        recursive = TRUE, # If directory is used, this will determine where we are interested in files contained within subdirectories within that file
+                        filetype = "csv", # If directory is used, what type of files are we pulling.
+                        sep = "_", # The character separating the different components
+                        subcols = NA) # An optional array that will replicate every column according to the arrays length and append the elements of the array to the end of each column name. Helpful if working with neural data wherein each datapoint has 3 dimensions and a value.)
+
 { ## Package Loading ----
   pacman::p_load(assertthat, tidyverse)
   
