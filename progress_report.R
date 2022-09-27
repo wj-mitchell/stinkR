@@ -11,7 +11,7 @@ progress_report <- function(i, # i represents the term you are using in your for
                                # If you're using a nested for loop, I'd recommend entering the term for the highest-level loop.
                             array) # the array that your for loop is iterating through; the right side of "for (i in ______)"
 {
-  progress_report <- which(array == i)
+  progress <- which(array == i)
   end_time <- Sys.time()
   if (progress == 1){
     mean_run_time <- as.numeric(end_time - start_time)
