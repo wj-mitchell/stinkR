@@ -1,5 +1,7 @@
 # progress_report || 2022.09.22
 
+# IN DEVELOPMENT
+
 # When placed in a for loop, progress report will output in the console 
 # the percentage of the for loop that has completed, the time at which
 # it has completed, and additionally, an estimation of how much time is 
@@ -12,6 +14,7 @@ progress_report <- function(i, # i represents the term you are using in your for
                             array) # the array that your for loop is iterating through; the right side of "for (i in ______)"
 {
   progress <- which(array == i)
+  start_time <- Sys.time()
   end_time <- Sys.time()
   if (progress == 1){
     mean_run_time <- as.numeric(end_time - start_time)
