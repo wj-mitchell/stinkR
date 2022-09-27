@@ -35,31 +35,8 @@ for (i in pts){
     # Create a variable to capture the file name for this run
     filename <- paste0(path, "FWD_export/sub-", i, "_ses-1_task-Aver_", j,"_desc_confounds_FWD.txt")
     
-    # Check whether this file exists, and if it doesn't, print an error.
-    if (!file.exists(filename)){
-      print(paste("Error:", i, "'s", j, "file could not be located. Generating a replacement..."))
-      
-      # Pull the last dataframe and change all datapoints to 0
-      df[,] <- 0 
-      
-      # And then save that dataframe as a new text file for that participant
-      write.table(df, 
-                  file = filename, 
-                  sep = "\t",
-                  row.names = FALSE,
-                  col.names = FALSE)
-      
-      # Note that the datafile has been created
-      print(paste("A replacement for", i, "'s", j, "file has been generated!"))
-    }
-    
     # If it does exist . . . 
     if (file.exists(filename)){
-      
-      # Check if the file is empty
-      if (file.info(filename)$size <= 0){
-        print(paste("Error:", i,"'s ", j,"file does not contain data"))
-      }
       
       # And if the file isn't empty . . .
       if (file.info(filename)$size > 0){
@@ -68,20 +45,25 @@ for (i in pts){
         df <- read.delim(file = filename,
                          sep = "",
                          header = T) 
+        # Create a row to track the number of FWDs
+        df$count <- 0
         
-        df$row <- 0
+        # Go through each row and count FWDs
         for (k in 1:length(rownames(df))){
           if (any(df[k,] == 1)){
-            df$row[k] <- 1
+            df$count[k] <- 1
           }
         }
         
-        sum(df$row)
-        df_FWD$FWD_rate[df_FWD$PTS == i & df_FWD$Run == j] <- (length(rownames(df)) - sum(df$row))/length(rownames(df))
-        
+        # Calculate the rate of FWDs
+        df_FWD$FWD_rate[df_FWD$PTS == i & df_FWD$Run == j] <- (length(rownames(df)) - sum(df$count))/length(rownames(df))
       }
     }
   }
 }
 
+exclude_FWD <- subset(df_FWD, df_FWD$FWD_rate < 0.85)
+no_FWD <- subset(df_FWD, is.na(df_FWD$FWD_rate))
+
+write.csv(exclude_FWD, paste0(path,"FWD_exclude.csv"))
         

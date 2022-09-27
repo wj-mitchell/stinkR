@@ -6,7 +6,7 @@ library(stringr)
 path <- "S:/Helion_Group/studies/rsa_moral/data/source/"
 
 # Creating a single master directory to host all of the new txt files
-dir.create(paste0(path,"look_onsets"))
+dir.create(paste0(path,"close_onsets"))
 
 # Identifying the different participant IDs
 pts <- list.files(path = path) %>%
@@ -65,7 +65,7 @@ for (i in pts){
         if (dir.exists(subdirname)){
           
           # Create a variable to capture the file name for this run
-          filename <- paste0(subdirname,"/look_", j,".txt")
+          filename <- paste0(subdirname,"/close_", j,".txt")
           
           # Check whether this file exists, and if it doesn't, print an error and give up.
           if (!file.exists(filename)){
@@ -94,7 +94,7 @@ for (i in pts){
                 
                 # And then save that dataframe as a new text file within that "look_onsets" folder
                 write.table(df_temp, 
-                            file = paste0(path,"look_onsets/", i ,"_", j, "_trial", k,".txt"), 
+                            file = paste0(path,"close_onsets/", i ,"_", j, "_trial", k,".txt"), 
                             sep = "\t",
                             row.names = FALSE,
                             col.names = FALSE)
